@@ -23,11 +23,29 @@ def forward(img_no):
     global forward_button
     global backward_button
     lab.grid_forget()
+    forward_button.grid_forget()
     # for i in image_list:
     lab1=Label(window,image=image_list[img_no-1],width=500,height=500)
+    forward_button=Button(window,text=">>",command=lambda:forward(img_no+1))
+    if img_no==5:
+        forward_button=Button(window,text=">>",state=DISABLED)
+    forward_button.grid(row=1,column=2)
     lab1.grid(row=0,column=0,columnspan=3)
 
-backward_button=Button(window,text="<<")
+def backward(img_no):
+    global lab
+    global forward_button
+    global backward_button
+    lab.grid_forget()
+    backward_button.grid_forget()
+    lab1=Label(window,image=image_list[img_no+1],width=500,height=500)
+    backward_button=Button(window,text="<<",command=lambda:backward(img_no-1))
+    if img_no==5:
+        backward_button=Button(window,text="<<",state=DISABLED)
+    backward_button.grid(row=1,column=0)
+    lab1.grid(row=0,column=0,columnspan=3)
+
+backward_button=Button(window,text="<<",command=lambda:backward(0))
 exit_button=Button(window,text="Exit",command=exit)
 forward_button=Button(window,text=">>",command=lambda:forward(2))
 forward_button.grid(row=1,column=2)
